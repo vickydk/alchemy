@@ -2,6 +2,7 @@ BEGIN;
 CREATE TABLE spaceship (
     id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
+    class VARCHAR(100) NOT NULL,
     crew BIGINT NOT NULL default 0,
     image VARCHAR(200),
     value DECIMAL(10 , 2 ) NOT NULL default 0,

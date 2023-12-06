@@ -90,8 +90,8 @@ func (s *spaceshipHandler) updateSpaceship(ctx echo.Context) error {
 // @Tags     spaceship
 // @Accept   json
 // @Produce  json
+// @Security BearerAuth
 // @Param    id  path    string  true "spaceship id"
-// @Param    request  body      spaceship.CreateSpaceshipRequest  true  "login request"
 // @Success  200      {object}  spaceship.SpaceshipResponse  "data"
 // @Failure  400      {object}  http.HTTPError  "error message"
 // @Router   /spaceship/id/{id} [get]
@@ -117,6 +117,7 @@ func (s *spaceshipHandler) findByID(ctx echo.Context) error {
 // @Tags     spaceship
 // @Accept   json
 // @Produce  json
+// @Security BearerAuth
 // @Param    request  query      spaceship.FilterSpaceship  true  "login request"
 // @Success  200      {object}  spaceship.FindSpaceshipResponse  "data"
 // @Failure  400      {object}  http.HTTPError  "error message"

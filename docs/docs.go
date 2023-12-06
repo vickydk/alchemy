@@ -57,6 +57,11 @@ const docTemplate = `{
         },
         "/spaceship": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -144,6 +149,11 @@ const docTemplate = `{
         },
         "/spaceship/id/{id}": {
             "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -161,15 +171,6 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
-                    },
-                    {
-                        "description": "login request",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/spaceship.CreateSpaceshipRequest"
-                        }
                     }
                 ],
                 "responses": {

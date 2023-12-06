@@ -71,6 +71,9 @@ GET /api/v1/spaceship
 #### Produces
   * application/json
 
+#### Security Requirements
+  * BearerAuth
+
 #### Parameters
 
 | Name | Source | Type | Go type | Separator | Required | Default | Description |
@@ -118,12 +121,14 @@ GET /api/v1/spaceship/id/{id}
 #### Produces
   * application/json
 
+#### Security Requirements
+  * BearerAuth
+
 #### Parameters
 
 | Name | Source | Type | Go type | Separator | Required | Default | Description |
 |------|--------|------|---------|-----------| :------: |---------|-------------|
 | id | `path` | string | `string` |  | ✓ |  | spaceship id |
-| request | `body` | [SpaceshipCreateSpaceshipRequest](#spaceship-create-spaceship-request) | `models.SpaceshipCreateSpaceshipRequest` | | ✓ | | login request |
 
 #### All responses
 | Code | Status | Description | Has headers | Schema |

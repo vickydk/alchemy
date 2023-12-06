@@ -160,6 +160,8 @@ paths:
           description: error message
           schema:
             $ref: '#/definitions/http.HTTPError'
+      security:
+      - BearerAuth: []
       summary: get list spaceship
       tags:
       - spaceship
@@ -199,12 +201,6 @@ paths:
         name: id
         required: true
         type: string
-      - description: login request
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/spaceship.CreateSpaceshipRequest'
       produces:
       - application/json
       responses:
@@ -216,6 +212,8 @@ paths:
           description: error message
           schema:
             $ref: '#/definitions/http.HTTPError'
+      security:
+      - BearerAuth: []
       summary: get spaceship
       tags:
       - spaceship

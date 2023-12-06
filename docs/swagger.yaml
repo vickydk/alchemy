@@ -1,0 +1,261 @@
+basePath: /api/v1
+definitions:
+  auth.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  auth.LoginResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      token:
+        $ref: '#/definitions/auth.Token'
+    type: object
+  auth.Token:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  http.HTTPError:
+    properties:
+      message: {}
+    type: object
+  http.HTTPResponse:
+    properties:
+      success:
+        type: boolean
+    type: object
+  spaceship.Armament:
+    properties:
+      qty:
+        type: string
+      title:
+        type: string
+    type: object
+  spaceship.CreateSpaceshipRequest:
+    properties:
+      armament:
+        items:
+          $ref: '#/definitions/spaceship.Armament'
+        type: array
+      class:
+        type: string
+      crew:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      value:
+        type: number
+    required:
+    - armament
+    - class
+    - name
+    - status
+    type: object
+  spaceship.DataSpaceship:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      status:
+        type: string
+    type: object
+  spaceship.FindSpaceshipResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/spaceship.DataSpaceship'
+        type: array
+    type: object
+  spaceship.SpaceshipResponse:
+    properties:
+      armament:
+        items:
+          $ref: '#/definitions/spaceship.Armament'
+        type: array
+      class:
+        type: string
+      crew:
+        type: integer
+      id:
+        type: integer
+      image:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      value:
+        type: number
+    type: object
+info:
+  contact: {}
+  title: alchemy
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Data
+          schema:
+            $ref: '#/definitions/auth.LoginResponse'
+        "400":
+          description: Error message
+          schema:
+            $ref: '#/definitions/http.HTTPError'
+      summary: create Token
+      tags:
+      - credential
+  /spaceship:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - in: query
+        name: class
+        type: string
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data
+          schema:
+            $ref: '#/definitions/spaceship.FindSpaceshipResponse'
+        "400":
+          description: error message
+          schema:
+            $ref: '#/definitions/http.HTTPError'
+      summary: get list spaceship
+      tags:
+      - spaceship
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/spaceship.CreateSpaceshipRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: success true
+          schema:
+            $ref: '#/definitions/http.HTTPResponse'
+        "400":
+          description: success false
+          schema:
+            $ref: '#/definitions/http.HTTPResponse'
+      security:
+      - BearerAuth: []
+      summary: create spaceship
+      tags:
+      - spaceship
+  /spaceship/id/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: spaceship id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/spaceship.CreateSpaceshipRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: data
+          schema:
+            $ref: '#/definitions/spaceship.SpaceshipResponse'
+        "400":
+          description: error message
+          schema:
+            $ref: '#/definitions/http.HTTPError'
+      summary: get spaceship
+      tags:
+      - spaceship
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: spaceship id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/spaceship.CreateSpaceshipRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success true
+          schema:
+            $ref: '#/definitions/http.HTTPResponse'
+        "400":
+          description: success false
+          schema:
+            $ref: '#/definitions/http.HTTPResponse'
+      security:
+      - BearerAuth: []
+      summary: update spaceship
+      tags:
+      - spaceship
+schemes:
+- http
+- https
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

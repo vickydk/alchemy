@@ -1,0 +1,14 @@
+BEGIN;
+CREATE TABLE spaceship (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    crew BIGINT NOT NULL default 0,
+    image VARCHAR(200),
+    value DECIMAL(10 , 2 ) NOT NULL default 0,
+    status VARCHAR(50) NOT NULL,
+    armament JSON NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+COMMIT;

@@ -1,0 +1,18 @@
+{
+  "apps":{
+    "name":"alchemy",
+    "version":"1.0.0",
+    "httpPort":8080
+  },
+  "database": {
+    "username": "mysql",
+    "password": "",
+    "name": "alchemy",
+    "schema": "public",
+    "host": "localhost",
+    "port": 3306,
+    "minIdleConnections": 10,
+    "maxOpenConnections": 30,
+    "debugMode": false
+  }
+}
